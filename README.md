@@ -5,7 +5,7 @@ Here is an example of what one particular command would look like:
 
 ![alt text](https://i.imgur.com/Lgll6dt.png)
 
-This bot was my first project using Python code. I had never tried it before, having used primarily Java and C in the past, so I figured it would be a fun project to familiarize myself with the language. I also learned quite a bit about using API and reading .json data. The bot is a whole lot of fun to use in my private servers with my friends, and is already full of inside jokes.
+This bot was my first project using Python code. I had never tried it before, having used primarily Java and C in the past, so I figured it would be a fun project to familiarize myself with the language. I also learned quite a bit about using API and reading .json data. The bot is a whole lot of fun to use in my private servers with my friends, and is already full of inside jokes. I'm sure that there are all sorts of loose ends that need to be tied up (such as a few declared variabled that never get used due to constant changes in implementation) but at least as of writing this, it's in a pretty solid state. I do hope to continue working on it periodically. One future plan is to implement voice functionality through use of the Amazon Alexa API, but that's a bit beyond my capabilities at the moment.
 
 A full list of the commands used to control the bot can be found below:
 
