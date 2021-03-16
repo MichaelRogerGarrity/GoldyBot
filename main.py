@@ -18,7 +18,8 @@ bot = commands.Bot(command_prefix='$')
 
 name = contextvars.ContextVar("name", default = 'Hello')
 client = discord.Client()
-
+req = requests.get("https://discord.com/api/path/to/the/endpoint")
+print(req)
 
 sad_words = ["sad", "depressed", "unhappy", "angry", "miserable", "depressing", "tilted"]
 
@@ -146,7 +147,7 @@ def get_anime_name(image):
 # Will return the episode of the anime in which the screenshot appeared, once again with trace.moe API
 def get_anime_episode(image):
   url = "https://trace.moe/api/search?url=" + image
-  response = requests.get("https://trace.moe/api/search?url=" + image) 
+  response = requests.get(url) 
   json_data = json.loads(response.text)
   anime_episode = json_data['docs'][0]['episode']
   anime_episode = str(anime_episode)
