@@ -23,8 +23,6 @@ $dog - Returns a randomly chosen picture of a dog
 
 $bitcoin - Returns the current value of one bitcoin in USD
 
-$joke - Returns a randomly generated joke (this command is currently commented out, I believe the API I was using may have shut down. They were pretty bad jokes anyway :P)
-
 $meme - Returns a randomly chosen meme
 
 $wink - Returns a randomly chosen anime wink gif
