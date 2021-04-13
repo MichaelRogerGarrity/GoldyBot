@@ -12,6 +12,7 @@ flask = "^1.1.2"
 pip = "^21.0.1"
 youtube-dl = "^2021.2.22"
 ffmpeg = "^1.4"
+python-dotenv = "^0.17.0"
 
 [tool.poetry.dev-dependencies]
 
