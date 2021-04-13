@@ -1,1 +1,10 @@
 discord.py
+requests.py
+json.py
+random.py
+pip.py
+youtube_dl.py
+contextvars.py
+asyncio.py
+functools.py
+itertools.py
