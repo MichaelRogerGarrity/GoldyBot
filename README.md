@@ -15,7 +15,7 @@ $monke - Monke time (also an inside joke)
 
 $inspire - Randomly chosen inspirational quote
 
-$search anime [link to image] - Identifies the name of the anime and number of the episode in which a screenshot appeared
+$anime [link to image] - Identifies the name of the anime and number of the episode in which a screenshot appeared
 
 $kanye - Returns a random Kanye West quote/tweet
 
