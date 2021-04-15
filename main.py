@@ -9,7 +9,6 @@ import contextvars
 import asyncio
 import functools
 import itertools
-from keep_alive import keep_alive
 from discord.ext import commands
 from dotenv import load_dotenv
 
@@ -331,5 +330,5 @@ async def stop(ctx):
     else:
         await ctx.send("The bot is not playing anything at the moment.")
 
-keep_alive()
+
 bot.run(os.getenv('TOKEN'))
