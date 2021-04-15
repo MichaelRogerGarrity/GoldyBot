@@ -1,10 +1,2 @@
 discord.py
 requests==2.25.1
-json
-random
-pip
-youtube_dl
-contextvars
-asyncio
-functools
-itertools
