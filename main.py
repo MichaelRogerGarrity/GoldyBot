@@ -9,7 +9,7 @@ import contextvars
 import asyncio
 import functools
 import itertools
-import PyNaCl
+import pynacl
 from discord.ext import commands
 
 
