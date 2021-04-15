@@ -9,7 +9,6 @@ import contextvars
 import asyncio
 import functools
 import itertools
-from replit import db
 from keep_alive import keep_alive
 from discord.ext import commands
 from dotenv import load_dotenv
