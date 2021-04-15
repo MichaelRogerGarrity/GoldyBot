@@ -1,5 +1,5 @@
 discord.py
-requests.py
+requests==2.25.1
 json.py
 random.py
 pip.py
