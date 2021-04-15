@@ -10,9 +10,8 @@ import asyncio
 import functools
 import itertools
 from discord.ext import commands
-from dotenv import load_dotenv
 
-load_dotenv()
+
 bot = commands.Bot(command_prefix='$')
 
 req = requests.get("https://discord.com/api/path/to/the/endpoint")
