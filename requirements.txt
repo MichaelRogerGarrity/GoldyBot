@@ -3,3 +3,4 @@ requests==2.25.1
 youtube_dl==2021.4.7
 cffi
 PyNaCl==1.4.0
+ffmpeg-python==0.2.0

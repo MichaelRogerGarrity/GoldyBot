@@ -10,6 +10,7 @@ import asyncio
 import functools
 import itertools
 import nacl
+import ffmpy
 from discord.ext import commands
 
 
