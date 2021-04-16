@@ -10,7 +10,7 @@ import asyncio
 import functools
 import itertools
 import nacl
-import ffmpy
+import ffmpeg
 from discord.ext import commands
 
 
