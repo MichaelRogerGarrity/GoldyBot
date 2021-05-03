@@ -71,6 +71,10 @@ def get_bitcoin():
   price = data['bpi']['USD']['rate']
   return(price)
 
+def get_ethereum():
+  r = request.get("https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD,EUR,CNY,JPY,GBP", function(error, response, body)
+  return(JSON.stringify(JSON.parse(body), null, 4))
+
 def get_meme():
   url = "https://some-random-api.ml/meme"
 
@@ -330,6 +334,11 @@ async def stop(ctx):
         await voice_client.stop()
     else:
         await ctx.send("The bot is not playing anything at the moment.")
+
+@bot.command(name='ethereum', help='Returns the current value of ethereum in USD')
+async def bitcoin(ctx):
+  response = get_bitcoin()
+  await ctx.send("One Bitcoin is currently worth $"+response)
 
 
 bot.run(os.getenv('TOKEN'))
