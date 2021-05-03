@@ -76,6 +76,7 @@ def get_ethereum():
   r = requests.get(URL)
   data = r.json()
   price = data['USD']
+  price = "{:.2f}".format(price)
   return(price)
 
 def get_meme():
