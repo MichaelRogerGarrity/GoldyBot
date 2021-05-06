@@ -345,7 +345,7 @@ async def eth(ctx):
   response = get_ethereum()
   await ctx.send("One Ether is currently worth $"+response)
   channel = bot.get_channel(839986437553651764)
- await channel.send('hello')
+  await channel.send('hello')
 
 @tasks.loop(hours=1)
 async def cryptoLoop():
