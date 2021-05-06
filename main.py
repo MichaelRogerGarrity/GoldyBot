@@ -12,6 +12,7 @@ import itertools
 import nacl
 import ffmpeg
 from discord.ext import commands
+from discord.ext import tasks
 
 
 bot = commands.Bot(command_prefix='$')
@@ -344,5 +345,13 @@ async def eth(ctx):
   response = get_ethereum()
   await ctx.send("One Ether is currently worth $"+response)
 
+@tasks.loop(hours=1)
+async def cryptoLoop():
+ btc = get_bitcoin()
+ eth = get_ethereum()
+ channel = client.get_channel(839986437553651764)
+ await channel.send('**Hourly Crypto Update:**/nBitcoin is currently worth: $'+btc+'/nEthereum is currently worth: $'+eth)
+
+cryptoLoop.start()
 
 bot.run(os.getenv('TOKEN'))
