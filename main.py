@@ -351,7 +351,7 @@ async def cryptoLoop():
  btc = get_bitcoin()
  eth = get_ethereum()
  channel = bot.get_channel(839986437553651764)
- await channel.send('**Hourly Crypto Update:**\nBitcoin is currently worth: $'+btc+'\nEthereum is currently worth: $'+eth)
+ await channel.send('**Hourly Crypto Update:**\nBitcoin is currently worth: **$'+btc+'**\nEthereum is currently worth: **$'+eth+'**')
 
 @cryptoLoop.before_loop
 async def before():
