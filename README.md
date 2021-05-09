@@ -5,9 +5,9 @@ Here is an example of what one particular command would look like:
 
 ![alt text](https://i.imgur.com/Lgll6dt.png)
 
-This bot was my first project using Python code. I had never tried it before, having used primarily Java and C in the past, so I figured it would be a fun project to familiarize myself with the language. I also learned quite a bit about using API and reading .json data. The bot is a whole lot of fun to use in my private servers with my friends, and is already full of inside jokes. I'm sure that there are all sorts of loose ends that need to be tied up (such as a few declared variabled that never get used due to constant changes in implementation) but at least as of writing this, it's in a pretty solid state. I do hope to continue working on it periodically. One future plan is to implement voice functionality through use of the Amazon Alexa API, but that's a bit beyond my capabilities at the moment.
+This bot was my first project using Python code. I had never tried it before, having used primarily Java and C in the past, so I figured it would be a fun project to familiarize myself with the language. I also learned quite a bit about using API and reading .json data. The bot is a whole lot of fun to use in my private servers with my friends, and is already full of inside jokes. I'm sure that there are all sorts of loose ends that need to be tied up (such as a few declared variabled that never get used due to constant changes in implementation) but at least as of writing this, it's in a pretty solid state. I do hope to continue working on it periodically. One future plan is to implement voice functionality to interact with the bot over voice using wake words and voice to text, but that's a pretty long-term goal.
 
-A full list of the commands used to control the bot can be found below:
+A (nearly) full list of the commands used to control the bot can be found below:
 
 $duffy - Monkey time (inside joke)
 
@@ -46,3 +46,5 @@ $yes - No (just says "No")
 $no - Yes (just says "Yes")
 
 $sus - Among Us (inside joke)
+
+In addition to commands, there is one continuous function running on a one hour loop which simply prints a feed of Bitcoin and Ethereum prices in a text channel on a Discord server. We got tired of constantly typing the commands to print the prices!
