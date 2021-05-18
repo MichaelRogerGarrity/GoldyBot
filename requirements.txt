@@ -6,4 +6,4 @@ PyNaCl==1.4.0
 ffmpeg-python==0.2.0
 discord.py[voice] ~= 0.16.0
 colorlog
-dotenv
+python-dotenv
