@@ -1,5 +1,6 @@
 import discord
 import os
+from dotenv import load_dotenv
 import requests
 import json
 import random
@@ -11,10 +12,8 @@ import functools
 import itertools
 import nacl
 import ffmpeg
-import 
 from discord.ext import commands
 from discord.ext import tasks
-
 
 
 bot = commands.Bot(command_prefix='$')
@@ -26,6 +25,7 @@ youtube_dl.utils.bug_reports_message = lambda: ''
 
 ytdl_format_options = {
     'format': 'bestaudio/best',
+    'outtmpl': '/music_files/%(id)s.%(ext)s',
     'restrictfilenames': True,
     'noplaylist': True,
     'nocheckcertificate': True,
@@ -34,7 +34,7 @@ ytdl_format_options = {
     'quiet': True,
     'no_warnings': True,
     'default_search': 'auto',
-    'source_address': '0.0.0.0' # bind to ipv4 since ipv6 addresses cause issues sometimes
+    'source_address': '0.0.0.0' 
 }
 
 ffmpeg_options = {
@@ -358,6 +358,5 @@ async def cryptoLoop():
 @cryptoLoop.before_loop
 async def before():
     await bot.wait_until_ready()
-
 
 bot.run(os.getenv('TOKEN'))
