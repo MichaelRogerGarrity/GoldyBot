@@ -2,6 +2,7 @@ import discord
 import os
 from dotenv import load_dotenv
 import requests
+from requests import get
 import json
 import random
 import pip
@@ -14,6 +15,8 @@ import nacl
 import ffmpeg
 from discord.ext import commands
 from discord.ext import tasks
+from youtube_dl import YoutubeDL
+
 
 
 bot = commands.Bot(command_prefix='$')
@@ -23,9 +26,11 @@ print(req)
 
 youtube_dl.utils.bug_reports_message = lambda: ''
 
+YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist':'True'}
+
 ytdl_format_options = {
     'format': 'bestaudio/best',
-    'outtmpl': '/music_files/%(id)s.%(ext)s',
+    'outtmpl': '/music_files/%(title)s.%(ext)s',
     'restrictfilenames': True,
     'noplaylist': True,
     'nocheckcertificate': True,
@@ -33,7 +38,7 @@ ytdl_format_options = {
     'logtostderr': False,
     'quiet': True,
     'no_warnings': True,
-    'default_search': 'auto',
+    'default_search': 'ytsearch',
     'source_address': '0.0.0.0' 
 }
 
@@ -59,6 +64,17 @@ class YTDLSource(discord.PCMVolumeTransformer):
             data = data['entries'][0]
         filename = data['title'] if stream else ytdl.prepare_filename(data)
         return filename
+
+def youtubesearch(arg):
+    with YoutubeDL(YDL_OPTIONS) as ydl:
+        try:
+            get(arg) 
+        except:
+            video = ydl.extract_info(f"ytsearch:{arg}", download=False)['entries'][0]
+        else:
+            video = ydl.extract_info(arg, download=False)
+    result = video['webpage_url']
+    return result
 
 # Will get a random inspirational quote from the ZenQuotes API
 def get_quote():
@@ -306,16 +322,23 @@ async def leave(ctx):
         await ctx.send("The bot is not connected to a voice channel.")
 
 @bot.command(name='play', help='To play song')
-async def play(ctx,url):
-    try :
+async def play(ctx, *, arg):
+  youtube_dl_opts = {}
+  url = youtubesearch(arg)
+  
+  with YoutubeDL(youtube_dl_opts) as ydl:
+      info_dict = ydl.extract_info(url, download=False)
+      video_url = info_dict.get("url", None)
+      video_id = info_dict.get("id", None)
+      video_title = info_dict.get('title', None)
+  try :
         server = ctx.message.guild
         voice_channel = server.voice_client
-
         async with ctx.typing():
             filename = await YTDLSource.from_url(url, loop=bot.loop)
             voice_channel.play(discord.FFmpegPCMAudio(executable="ffmpeg.exe", source=filename))
-        await ctx.send('**Now playing:** {}'.format(filename))
-    except:
+        await ctx.send('**Now playing:** {}'.format(video_title))
+  except:
         await ctx.send("The bot is not connected to a voice channel.")
 
 
