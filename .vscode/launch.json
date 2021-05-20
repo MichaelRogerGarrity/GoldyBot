@@ -10,8 +10,9 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "env": {
-                "PYTHONPATH": "${workspaceRoot}",
+            "env" : {
+                "TOKEN" : "ODEyOTQzMjY3OTIxNjU3ODU3.YDIGag.kx84hjacJTiMDwV9m0AWyVs2A6k",
+                "SIMPLE_ECON_API" : "mYjWPGwmxImbYKE8d6yfFYN1vdnQSmMrwpsrAqm7MjnkGhLSb9QFqy4N7bEM4Dzg"
             }
         }
     ]

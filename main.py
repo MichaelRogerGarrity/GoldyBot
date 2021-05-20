@@ -16,6 +16,7 @@ import ffmpeg
 from discord.ext import commands
 from discord.ext import tasks
 from youtube_dl import YoutubeDL
+load_dotenv('vscode.env')
 
 
 
@@ -46,7 +47,6 @@ ffmpeg_options = {
     'options': '-vn'
 }
 
-ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
 
 class YTDLSource(discord.PCMVolumeTransformer):
     def __init__(self, source, *, data, volume=0.5):
@@ -349,7 +349,7 @@ async def pause(ctx):
         await voice_client.pause()
     else:
         await ctx.send("The bot is not playing anything at the moment.")
-    
+
 @bot.command(name='resume', help='Resumes the song')
 async def resume(ctx):
     voice_client = ctx.message.guild.voice_client
