@@ -16,7 +16,15 @@ import ffmpeg
 from discord.ext import commands
 from discord.ext import tasks
 from youtube_dl import YoutubeDL
+import genshinstats as gs
+#from SimpleEconomy import Seco
 load_dotenv('vscode.env')
+gs.set_cookie(ltuid=os.getenv('ltuid'), ltoken=os.getenv('ltoken'))
+
+
+#intents = discord.Intents(messages=True, guilds=True,members=True)
+#bot = commands.Bot(command_prefix="!",intents=intents)
+#seco=Seco(bot, os.getenv('SIMPLE_ECON_API'), "goldybot", def_bal = 0, def_bank = 0, logs=True)
 
 
 
@@ -47,6 +55,7 @@ ffmpeg_options = {
     'options': '-vn'
 }
 
+ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
 
 class YTDLSource(discord.PCMVolumeTransformer):
     def __init__(self, source, *, data, volume=0.5):
@@ -300,6 +309,10 @@ async def no(ctx):
 async def yes(ctx):
   await ctx.send('No')
 
+@bot.command(name='slap', help='Sends a video of a slap that ends by crashing the recipient\'s discord client')
+async def no(ctx):
+  await ctx.send('https://cdn.discordapp.com/attachments/777379028654227500/845179288805703710/Slap.mp4')
+
 @bot.command(name='sus', help='Among Us')
 async def sus(ctx):
   await ctx.send("sus")
@@ -366,11 +379,73 @@ async def stop(ctx):
     else:
         await ctx.send("The bot is not playing anything at the moment.")
 
+@bot.command(name='vengabus', help='To play song')
+async def vengabus(ctx):
+  
+  try :
+        server = ctx.message.guild
+        voice_channel = server.voice_client
+        async with ctx.typing():
+            filename = "J:\Other stuff\Code Projects\GoldyBot\music_files\permanent songs\\vengabus.mp3"
+            voice_channel.play(discord.FFmpegPCMAudio(executable="ffmpeg.exe", source=filename))     
+  except:
+        await ctx.send("The bot is not connected to a voice channel.")
+
 @bot.command(name='eth', help='Returns the current value of Ethereum in USD')
 async def eth(ctx):
   response = get_ethereum()
   await ctx.send("One Ether is currently worth $"+response)
 
+@bot.command(name='duck', help='Shuba shuba')
+async def duck(ctx):
+  await ctx.send(file=discord.File(r'J:\Other stuff\Code Projects\GoldyBot\music_files\videos\duck.mp4'))
+
+@bot.command(name='bal', help='Displays the balance of GoldyCoin in your wallet.')
+async def bal(ctx):
+    balance=await seco.get_balance(ctx.author.id)
+    
+    e=discord.Embed(
+        title="Balance",
+        description=f"Your balance is: {balance}"
+    )
+    await ctx.send(embed=e)
+
+@bot.command(name='bank', help='Displays the balance of GoldyCoin in your bank account.')
+async def bank(ctx):
+    balance=await bot.seco.get_bank(ctx.author.id)
+    
+    e=discord.Embed(
+        title="Bank",
+        description=f"Your Bank balance is: {balance}"
+    )
+    await ctx.send(embed=e)
+
+@bot.command(name='genshin', help='Get Genshin data. Example: \"$genshin michael characters\" Acceptable parameters for last word: characters, stats')
+async def genshin(ctx, name, arg):
+  if name=='michael':
+    uid = 626923400
+    name2 = 'Michael'
+  if name=='liam':
+    uid = 1
+    name2 = 'Liam'
+  if name=='savannah':
+    uid = 2
+    name2 = 'Savannah'
+  userInfo = gs.get_user_info(uid)
+  output = ''
+  if arg=='characters':
+    characters = gs.get_all_characters(uid)
+    output = '**List of '+name2+'\'s Characters:**\n'
+    for char in characters:
+      output = output+(f"**{char['rarity']}☆ {char['name']:10}** | lvl {char['level']:2}    C{char['constellation']}")+'\n'
+  if arg=='stats':
+    stats = gs.get_user_info(uid)['stats']
+    output = '**List of all '+name2+'\'s Stats:**\n'
+    for field,value in stats.items():
+      output=output+(f"{field.replace('_',' ')}: {value}")+'\n'
+
+  await ctx.send(output)
+  
 @tasks.loop(hours=1)
 async def cryptoLoop():
  btc = get_bitcoin()
