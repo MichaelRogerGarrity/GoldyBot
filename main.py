@@ -422,29 +422,37 @@ async def bank(ctx):
 
 @bot.command(name='genshin', help='Get Genshin data. Example: \"$genshin michael characters\" Acceptable parameters for last word: characters, stats')
 async def genshin(ctx, name, arg):
+  uid = 1
+  output = ''
   if name=='michael':
     uid = 626923400
     name2 = 'Michael'
   if name=='liam':
-    uid = 1
+    uid = gs.get_uid_from_community(18666797)
     name2 = 'Liam'
   if name=='savannah':
-    uid = 2
+    uid = 616103451
     name2 = 'Savannah'
-  userInfo = gs.get_user_info(uid)
-  output = ''
+  if name=='nicole':
+    uid = 602438360
+    name2 = 'nicole'
   if arg=='characters':
     characters = gs.get_all_characters(uid)
     output = '**List of '+name2+'\'s Characters:**\n'
     for char in characters:
       output = output+(f"**{char['rarity']}☆ {char['name']:10}** | lvl {char['level']:2}    C{char['constellation']}")+'\n'
+    await ctx.send(output)
   if arg=='stats':
     stats = gs.get_user_info(uid)['stats']
     output = '**List of all '+name2+'\'s Stats:**\n'
     for field,value in stats.items():
       output=output+(f"{field.replace('_',' ')}: {value}")+'\n'
+    await ctx.send(output)
 
-  await ctx.send(output)
+  gs.sign_in()
+  gs.get_daily_rewards()
+  
+  
   
 @tasks.loop(hours=1)
 async def cryptoLoop():
