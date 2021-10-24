@@ -435,7 +435,7 @@ async def genshin(ctx, name, arg):
     name2 = 'Savannah'
   if name=='nicole':
     uid = 602438360
-    name2 = 'nicole'
+    name2 = 'Nicole'
   if arg=='characters':
     characters = gs.get_all_characters(uid)
     output = '**List of '+name2+'\'s Characters:**\n'
