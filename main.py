@@ -29,7 +29,6 @@ gs.set_cookie(ltuid=os.getenv('ltuid'), ltoken=os.getenv('ltoken'))
 #seco=Seco(bot, os.getenv('SIMPLE_ECON_API'), "goldybot", def_bal = 0, def_bank = 0, logs=True)
 
 
-
 bot = commands.Bot(command_prefix='$')
 
 req = requests.get("https://discord.com/api/path/to/the/endpoint")
@@ -459,8 +458,14 @@ async def genshin(ctx, name, arg):
       output=output+(f"{field.replace('_',' ')}: {value}")+'\n'
     await ctx.send(output)
 
-  gs.sign_in()
-  gs.get_daily_rewards()
+@bot.command(name='rng', help='Returns a random number from 0 to the input number')
+async def rng(ctx, num):
+  temp = random.randrange(int(num))
+  response = temp+1
+  await ctx.send(response)
+
+gs.sign_in()
+gs.get_daily_rewards()
   
 @bot.command(name='timer', help='Functions as a timer for a set number of hours, minutes, and/or seconds.')
 async def timer(ctx, timeString):
