@@ -13,6 +13,8 @@ import functools
 import itertools
 import nacl
 import ffmpeg
+import re
+import time
 from discord.ext import commands
 from discord.ext import tasks
 from youtube_dl import YoutubeDL
@@ -89,6 +91,9 @@ def youtubesearch(arg):
             video = ydl.extract_info(arg, download=False)
     result = video['webpage_url']
     return result
+
+
+  
 
 # Will get a random inspirational quote from the ZenQuotes API
 def get_quote():
@@ -405,15 +410,15 @@ async def eth(ctx):
 async def duck(ctx):
   await ctx.send(file=discord.File(r'J:\Other stuff\Code Projects\GoldyBot\music_files\videos\duck.mp4'))
 
-@bot.command(name='bal', help='Displays the balance of GoldyCoin in your wallet.')
-async def bal(ctx):
-    balance=await seco.get_balance(ctx.author.id)
-    
-    e=discord.Embed(
-        title="Balance",
-        description=f"Your balance is: {balance}"
-    )
-    await ctx.send(embed=e)
+#@bot.command(name='bal', help='Displays the balance of GoldyCoin in your wallet.')
+#async def bal(ctx):
+#    balance=await seco.get_balance(ctx.author.id)
+#    
+#    e=discord.Embed(
+#        title="Balance",
+#        description=f"Your balance is: {balance}"
+#    )
+#    await ctx.send(embed=e)
 
 @bot.command(name='bank', help='Displays the balance of GoldyCoin in your bank account.')
 async def bank(ctx):
@@ -457,7 +462,52 @@ async def genshin(ctx, name, arg):
   gs.sign_in()
   gs.get_daily_rewards()
   
+@bot.command(name='timer', help='Functions as a timer for a set number of hours, minutes, and/or seconds.')
+async def timer(ctx, timeString):
+  validTime = True
+  # checks for any letters A-Z
+  if timeString.upper().isupper():
+    validTime = False
+
+  # can't be empty, and hh:mm:ss is the max size, which is 8 characters
+  if len(timeString) == 0 or len(timeString) > 8:
+    validTime = False
+
+  if timeString.isnumeric():
+    total_time = int(timeString)
+  elif validTime:
+    #regex to check formatting of string
+    if not re.match("^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$", timeString):
+      validTime = False
+    
+    if len(timeString) == 8:
+      total_time = int(timeString[0:2])*3600 + int(timeString[3:5])*60 + int(timeString[6:8])
+    elif len(timeString) == 5:
+      total_time = int(timeString[0:2])*60 + int(timeString[3:5])
+    elif len(timeString) <= 2:
+      total_time = int(timeString)
+  if validTime:
+    await ctx.send("Beginning " + str(total_time) + " second timer now!")
+    while total_time > 0:
+      time.sleep(1)
+      total_time -= 1
+      if total_time%5 == 0 and 0 < total_time < 20:
+        await ctx.send(str(total_time) + " seconds left!")
+      if total_time == 60:
+        await ctx.send("1 minute left!")
+      if total_time == 30:
+        await ctx.send("30 seconds left!")
+      if 0 < total_time < 5:
+        await ctx.send(str(total_time) + " seconds left!")
+    await ctx.send("Time's up! Timer has reached zero.")
+  else:
+    await ctx.send("Please enter a valid time format. Either a number of seconds or hh:mm:ss is acceptable.")
   
+@bot.command(name='roll', help='Rolls a random number ranging from 1 to the entered max.')
+async def roll(ctx, max):
+  randNum = random.randrange(1, int(max)+1)
+  await ctx.send(str(randNum))
+   
   
 @tasks.loop(hours=1)
 async def cryptoLoop():
