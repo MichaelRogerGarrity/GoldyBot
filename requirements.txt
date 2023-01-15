@@ -1,12 +1,12 @@
 discord.py
-requests
-youtube_dl
+requests==2.25.1
+youtube_dl==2021.4.7
 cffi --only-binary all; sys_platform == 'win32'
 PyNaCl
-ffmpeg-python
-discord.py[voice]
+ffmpeg-python==0.2.0
+discord.py[voice] ~= 0.16.0
 colorlog
 python-dotenv
 youtube-search
-python-decouple
-genshinstats
+python-decouple==3.1
+genshinstats==1.3.12.1
