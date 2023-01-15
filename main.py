@@ -24,12 +24,12 @@ load_dotenv('vscode.env')
 gs.set_cookie(ltuid=os.getenv('ltuid'), ltoken=os.getenv('ltoken'))
 
 
-#intents = discord.Intents(messages=True, guilds=True,members=True)
+intents = discord.Intents(messages=True, message_content=True, guilds=True, members=True, guild_messages=True)
 #bot = commands.Bot(command_prefix="!",intents=intents)
 #seco=Seco(bot, os.getenv('SIMPLE_ECON_API'), "goldybot", def_bal = 0, def_bank = 0, logs=True)
 
 
-bot = commands.Bot(command_prefix='$')
+bot = commands.Bot(command_prefix='$', intents=intents)
 
 req = requests.get("https://discord.com/api/path/to/the/endpoint")
 print(req)
